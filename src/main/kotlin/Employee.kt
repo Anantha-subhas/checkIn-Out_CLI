@@ -3,7 +3,8 @@ class Employee(
     var firstName: String,
     var lastName: String,
     var role: Role,
-    var reportTo: SupervisorRole
+    var reportTo: SupervisorRole,
+    var department: Department // ✅ new field
 ) {
     companion object {
         private var counter = 1
@@ -39,13 +40,18 @@ class Employee(
             val supervisor = SupervisorRole.entries.getOrNull(readLine()?.toIntOrNull()?.minus(1) ?: -1)
                 ?: throw IllegalArgumentException("Invalid supervisor selected")
 
+            println("Select Department:")
+            Department.entries.forEachIndexed { i, d -> println("${i + 1}. $d") }
+            val department = Department.entries.getOrNull(readLine()?.toIntOrNull()?.minus(1) ?: -1)
+                ?: throw IllegalArgumentException("Invalid department selected")
+
             val id = generateId()
             println("Generated Employee ID: $id")
-            return Employee(id, firstName, lastName, role, supervisor)
+            return Employee(id, firstName, lastName, role, supervisor, department)
         }
     }
 
     override fun toString(): String {
-        return "ID: $id | Name: $firstName $lastName | Role: $role | Reports To: $reportTo"
+        return "ID: $id | Name: $firstName $lastName | Role: $role | Reports To: $reportTo | Department: $department"
     }
 }

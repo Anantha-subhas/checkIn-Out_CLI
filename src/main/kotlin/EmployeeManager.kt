@@ -16,7 +16,6 @@ class EmployeeManager {
     fun showEmployees() {
         println(employeeList)
     }
-
     fun checkIn() {
         print("Enter employee ID: ")
         val id = readLine()?.trim().orEmpty()
